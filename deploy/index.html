@@ -8,6 +8,7 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/iife.min.js" crossorigin="anonymous"></script>
 <style>
 
 /* tokens/colors.css */
@@ -238,6 +239,12 @@ html, body { margin: 0; background: var(--gray-100); }
 <body>
 <div id="root"></div>
 <script>window.__WORDMARK = "data:image/svg+xml;utf8,%3Csvg%20width%3D%22118%22%20height%3D%2230%22%20viewBox%3D%220%200%20118%2030%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20role%3D%22img%22%20aria-label%3D%22moodle%22%3E%0A%20%20%0A%20%20%3Ctext%20x%3D%220%22%20y%3D%2223%22%20font-family%3D%22-apple-system%2C%20%26%2339%3BSegoe%20UI%26%2339%3B%2C%20Roboto%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20letter-spacing%3D%22-0.5%22%20fill%3D%22%23f98012%22%3Emoodle%3C%2Ftext%3E%0A%20%20%0A%20%20%3Cg%20transform%3D%22translate(20.5%2C3.2)%22%20fill%3D%22%23f98012%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%203.2%20L6%200%20L12%203.2%20L6%206.4%20Z%22%3E%3C%2Fpath%3E%0A%20%20%20%20%3Crect%20x%3D%225.4%22%20y%3D%225.2%22%20width%3D%221.2%22%20height%3D%223.4%22%20rx%3D%220.6%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Ccircle%20cx%3D%226%22%20cy%3D%229%22%20r%3D%221.1%22%3E%3C%2Fcircle%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E";</script>
+<script>
+// Supabase client initialization
+const SUPABASE_URL = 'https://0ec90b57d6e95fcbda19832f.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJib2x0IiwicmVmIjoiMGVjOTBiNTdkNmU5NWZjYmRhMTk4MzJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4ODE1NzQsImV4cCI6MTc1ODg4MTU3NH0.9I8-U0x86Ak8t2DGaIk0HfvTSLsAyzdnz-Nw00mMkKw';
+window.supabase = window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+</script>
 <script>
 /* === Design System bundle (inlined) === */
 /* @ds-bundle: {"format":3,"namespace":"MoodleBoostDesignSystem_c73480","components":[{"name":"Avatar","sourcePath":"components/core/Avatar.jsx"},{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"ProgressBar","sourcePath":"components/core/ProgressBar.jsx"},{"name":"Switch","sourcePath":"components/core/Switch.jsx"},{"name":"CourseCard","sourcePath":"components/course/CourseCard.jsx"},{"name":"EmptyState","sourcePath":"components/feedback/EmptyState.jsx"},{"name":"Checkbox","sourcePath":"components/forms/Checkbox.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Card","sourcePath":"components/layout/Card.jsx"},{"name":"Navbar","sourcePath":"components/navigation/Navbar.jsx"}],"sourceHashes":{"components/core/Avatar.jsx":"fd9dc5e642d8","components/core/Badge.jsx":"559b5aa518b9","components/core/Button.jsx":"105f9f44f587","components/core/ProgressBar.jsx":"a262dac23718","components/core/Switch.jsx":"441db7af04e9","components/core/useDsStyles.js":"e8afebebb73f","components/course/CourseCard.jsx":"f2bbe76bc531","components/feedback/EmptyState.jsx":"e2e3b51637fd","components/forms/Checkbox.jsx":"afce20890307","components/forms/Input.jsx":"af6486f11541","components/forms/Select.jsx":"c529551376d4","components/layout/Card.jsx":"d9e4fd86f850","components/navigation/Navbar.jsx":"1a1677b358df","ui_kits/moodle/App.jsx":"f6d29f78aab6","ui_kits/moodle/auth.jsx":"c88b793c50fb","ui_kits/moodle/calendar.jsx":"143be1751dd0","ui_kits/moodle/courses.jsx":"0d575663c3c3","ui_kits/moodle/dashboard.jsx":"24afb21a51a1","ui_kits/moodle/data.js":"e6b1493a3fec","ui_kits/moodle/messages.jsx":"8769731cbbf6","ui_kits/moodle/profile.jsx":"600c6f5614cc"},"inlinedExternals":[],"unexposedExports":[{"name":"useDsStyles","sourcePath":"components/core/useDsStyles.js"}]} */
@@ -3576,14 +3583,19 @@ function AuthShell({ children }) {
 }
 
 function LoginScreen({ onLogin, onGoSignup }) {
-  const [user, setUser] = React.useState("samuel.niva");
+  const [email, setEmail] = React.useState("");
   const [pw, setPw] = React.useState("");
-  const [err, setErr] = React.useState(false);
+  const [err, setErr] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    if (!pw) { setErr(true); return; }
-    onLogin();
+    if (!email || !pw) { setErr("Please enter email and password."); return; }
+    setLoading(true);
+    setErr("");
+    const { error } = await window.supabase.auth.signInWithPassword({ email, password: pw });
+    if (error) { setErr(error.message); setLoading(false); }
+    else { onLogin(); }
   };
 
   return (
@@ -3594,17 +3606,19 @@ function LoginScreen({ onLogin, onGoSignup }) {
           Use your university account to continue.
         </p>
         <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <MInput label="Username" value={user} onChange={(e) => setUser(e.target.value)}
-            icon={<i className="fa-solid fa-user" />} placeholder="firstname.lastname" />
-          <MInput label="Password" type="password" value={pw} error={err}
-            help={err ? "Please enter your password." : undefined}
-            onChange={(e) => { setPw(e.target.value); setErr(false); }}
+          <MInput label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+            icon={<i className="fa-solid fa-envelope" />} placeholder="you@student.oulu.fi" />
+          <MInput label="Password" type="password" value={pw} error={!!err}
+            help={err || undefined}
+            onChange={(e) => { setPw(e.target.value); setErr(""); }}
             icon={<i className="fa-solid fa-lock" />} placeholder="••••••••" />
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <MCheck label="Remember username" defaultChecked />
+            <MCheck label="Remember me" defaultChecked />
             <a href="#" style={{ fontSize: 13 }}>Forgotten password?</a>
           </div>
-          <MBtn variant="primary" type="submit" block>Log in</MBtn>
+          <MBtn variant="primary" type="submit" block disabled={loading}>
+            {loading ? "Signing in..." : "Log in"}
+          </MBtn>
         </form>
       </div>
       <div style={{ borderTop: "1px solid var(--border-color)", padding: "16px 28px", background: "var(--gray-100)", borderRadius: "0 0 var(--radius) var(--radius)", textAlign: "center", fontSize: 14 }}>
@@ -3615,9 +3629,25 @@ function LoginScreen({ onLogin, onGoSignup }) {
 }
 
 function SignupScreen({ onSignup, onGoLogin }) {
-  const [f, setF] = React.useState({ first: "", last: "", email: "", user: "", pw: "" });
+  const [f, setF] = React.useState({ first: "", last: "", email: "", studentId: "", pw: "" });
+  const [err, setErr] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
-  const submit = (e) => { e.preventDefault(); onSignup(); };
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!f.email || !f.pw || !f.first || !f.last) { setErr("Please fill all required fields."); return; }
+    setLoading(true);
+    setErr("");
+    const { error } = await window.supabase.auth.signUp({
+      email: f.email,
+      password: f.pw,
+      options: {
+        data: { first_name: f.first, last_name: f.last, student_id: f.studentId }
+      }
+    });
+    if (error) { setErr(error.message); setLoading(false); }
+    else { onSignup(); }
+  };
 
   return (
     <AuthShell>
@@ -3632,10 +3662,12 @@ function SignupScreen({ onSignup, onGoLogin }) {
             <MInput label="Surname" value={f.last} onChange={set("last")} placeholder="Niva" />
           </div>
           <MInput label="Email address" type="email" value={f.email} onChange={set("email")} placeholder="you@student.oulu.fi" />
-          <MInput label="Username" value={f.user} onChange={set("user")} placeholder="firstname.lastname" />
-          <MInput label="Password" type="password" value={f.pw} onChange={set("pw")} help="At least 8 characters." placeholder="••••••••" />
+          <MInput label="Student ID (optional)" value={f.studentId} onChange={set("studentId")} placeholder="AB1234" />
+          <MInput label="Password" type="password" value={f.pw} onChange={set("pw")} help={err || "At least 8 characters."} error={!!err} placeholder="••••••••" />
           <MCheck label="I agree to the site policy and terms of use." defaultChecked />
-          <MBtn variant="primary" type="submit" block>Create my new account</MBtn>
+          <MBtn variant="primary" type="submit" block disabled={loading}>
+            {loading ? "Creating account..." : "Create my new account"}
+          </MBtn>
         </form>
       </div>
       <div style={{ borderTop: "1px solid var(--border-color)", padding: "16px 28px", background: "var(--gray-100)", borderRadius: "0 0 var(--radius) var(--radius)", textAlign: "center", fontSize: 14 }}>
@@ -4211,7 +4243,7 @@ const DRAWER = [
   { key: "profile", label: "Profile", icon: "fa-user" },
 ];
 
-function Drawer({ open, screen, go }) {
+function Drawer({ open, screen, go, onLogout }) {
   return (
     <aside style={{ width: open ? "var(--drawer-width)" : 0, flex: "none", borderRight: open ? "1px solid var(--border-color)" : "0", background: "#fff", overflow: "hidden", transition: "width .18s ease" }}>
       <nav style={{ width: "var(--drawer-width)", padding: "16px 12px" }}>
@@ -4229,35 +4261,167 @@ function Drawer({ open, screen, go }) {
             <i className={`fa-solid ${["fa-house", "fa-folder", "fa-table-list"][i]}`} style={{ width: 18, textAlign: "center", color: "var(--gray-500)" }} />{t}
           </a>
         ))}
+        <div style={{ borderTop: "1px solid var(--gray-200)", margin: "12px 0" }} />
+        <button onClick={onLogout} style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "10px 12px", marginBottom: 2, border: 0, borderRadius: "var(--radius)", background: "transparent", color: "var(--danger)", fontWeight: 400, fontSize: 15, cursor: "pointer", textAlign: "left" }}>
+          <i className="fa-solid fa-right-from-bracket" style={{ width: 18, textAlign: "center" }} />Log out
+        </button>
       </nav>
     </aside>
   );
 }
 
 function App() {
-  const D = window.MOODLE_DATA;
-  const [authed, setAuthed] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+  const [profile, setProfile] = React.useState(null);
+  const [courses, setCourses] = React.useState([]);
+  const [enrolledCourses, setEnrolledCourses] = React.useState([]);
+  const [assignments, setAssignments] = React.useState([]);
+  const [calendarEvents, setCalendarEvents] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [authScreen, setAuthScreen] = React.useState("login");
   const [screen, setScreen] = React.useState("dashboard");
-  const [course, setCourse] = React.useState(null);
+  const [activeCourse, setActiveCourse] = React.useState(null);
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [editMode, setEditMode] = React.useState(false);
   const [toast, setToast] = React.useState(null);
 
+  // Auth state listener
+  React.useEffect(() => {
+    const { data: { subscription } } = window.supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        setUser(session.user);
+        await fetchUserData(session.user.id);
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        setProfile(null);
+        setCourses([]);
+        setEnrolledCourses([]);
+        setLoading(false);
+      }
+    });
+
+    // Check existing session
+    window.supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session?.user) {
+        setUser(session.user);
+        await fetchUserData(session.user.id);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const fetchUserData = async (userId) => {
+    setLoading(true);
+    try {
+      // Fetch profile
+      const { data: prof } = await window.supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+      setProfile(prof);
+
+      // Fetch all courses
+      const { data: allCourses } = await window.supabase.from('courses').select('*');
+      setCourses(allCourses || []);
+
+      // Fetch enrollments for user
+      const { data: enrolls } = await window.supabase
+        .from('enrollments')
+        .select('*, courses(*)')
+        .eq('user_id', userId);
+      setEnrolledCourses((enrolls || []).map(e => ({
+        ...e.courses,
+        progress: e.progress,
+        enrollmentId: e.id
+      })).filter(e => e.id));
+
+      // Fetch assignments for enrolled courses
+      const enrolledIds = (enrolls || []).map(e => e.course_id).filter(Boolean);
+      if (enrolledIds.length > 0) {
+        const { data: assigns } = await window.supabase
+          .from('assignments')
+          .select('*, courses(code, short_name, color)')
+          .in('course_id', enrolledIds);
+        setAssignments(assigns || []);
+      }
+
+      // Fetch calendar events
+      const { data: events } = await window.supabase.from('calendar_events').select('*, courses(code, short_name, color)');
+      setCalendarEvents(events || []);
+    } catch (e) {
+      console.error('Error fetching user data:', e);
+    }
+    setLoading(false);
+  };
+
   const go = (s) => { setScreen(s); window.scrollTo(0, 0); };
-  const openCourse = (c) => { setCourse(c); setScreen("course"); window.scrollTo(0, 0); };
+  const openCourse = (c) => { setActiveCourse(c); setScreen("course"); window.scrollTo(0, 0); };
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(null), 2600); };
 
-  if (!authed) {
+  const handleLogout = async () => {
+    await window.supabase.auth.signOut();
+    setUser(null);
+    setProfile(null);
+  };
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--gray-100)" }}>
+        <div style={{ textAlign: "center" }}>
+          <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: 32, color: "var(--brand-primary)" }} />
+          <p style={{ marginTop: 16, color: "var(--text-muted)" }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
     return authScreen === "login"
-      ? <window.LoginScreen onLogin={() => setAuthed(true)} onGoSignup={() => setAuthScreen("signup")} />
-      : <window.SignupScreen onSignup={() => setAuthed(true)} onGoLogin={() => setAuthScreen("login")} />;
+      ? <window.LoginScreen onLogin={() => {}} onGoSignup={() => setAuthScreen("signup")} />
+      : <window.SignupScreen onSignup={() => {}} onGoLogin={() => setAuthScreen("login")} />;
   }
 
   const navLinks = [
     { label: "Dashboard", href: "#", active: screen === "dashboard" },
     { label: "My courses", href: "#", active: ["courses", "course", "browse"].includes(screen) },
   ];
+
+  const userName = profile ? `${profile.first_name} ${profile.last_name}` : user.email;
+  const mockUser = { name: userName, firstName: profile?.first_name || '', email: profile?.email || user.email };
+
+  // Build timeline data structure for legacy components
+  const timeline = assignments.map(a => ({
+    course: a.courses?.code,
+    courseName: a.courses?.short_name || a.courses?.name,
+    title: a.title,
+    type: a.type,
+    due: a.due_at ? new Date(a.due_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : null,
+    status: a.due_at && new Date(a.due_at) > new Date() ? 'due' : 'overdue',
+    color: a.courses?.color || 'blue'
+  }));
+
+  // Build calendar data structure
+  const calendarByDay = {};
+  calendarEvents.forEach(ev => {
+    const day = ev.event_date.getDate();
+    if (!calendarByDay[day]) calendarByDay[day] = [];
+    calendarByDay[day].push({ title: ev.title, color: ev.courses?.color || ev.event_type || 'info', course: ev.courses?.short_name || '' });
+  });
+
+  // Pass data via window for legacy components
+  window.MOODLE_DATA = {
+    user: mockUser,
+    courses: enrolledCourses,
+    catalog: courses.filter(c => !enrolledCourses.find(e => e.id === c.id)),
+    timeline,
+    calendar: calendarByDay,
+    messages: [],
+    zeroActivity: { course: null, courseName: null, students: [] }
+  };
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff" }}>
@@ -4266,8 +4430,8 @@ function App() {
         <div style={{ flex: 1 }}>
           <AppNavbar
             links={navLinks}
-            user={{ name: D.user.name }}
-            messageCount={3}
+            user={{ name: userName }}
+            messageCount={0}
             notificationCount={0}
             editMode={editMode}
             onToggleEditMode={setEditMode}
@@ -4276,15 +4440,23 @@ function App() {
       </div>
 
       <div style={{ display: "flex", alignItems: "stretch", minHeight: "calc(100vh - var(--navbar-height))" }}>
-        <Drawer open={drawerOpen} screen={screen} go={go} />
+        <Drawer open={drawerOpen} screen={screen} go={go} onLogout={handleLogout} />
         <main style={{ flex: 1, minWidth: 0, background: "#fff" }}>
-          {screen === "dashboard" && <window.DashboardScreen user={D.user} onOpenCourse={openCourse} onOpenCalendar={() => go("calendar")} />}
+          {screen === "dashboard" && <window.DashboardScreen user={mockUser} onOpenCourse={openCourse} onOpenCalendar={() => go("calendar")} />}
           {screen === "courses" && <window.MyCoursesScreen onOpenCourse={openCourse} onBrowse={() => go("browse")} />}
-          {screen === "browse" && <window.BrowseScreen onBack={() => go("courses")} onEnrol={(c) => { go("courses"); showToast(`Enrolled in ${c.code}`); }} />}
-          {screen === "course" && course && <window.CourseScreen course={course} onBack={() => go("courses")} />}
+          {screen === "browse" && <window.BrowseScreen onBack={() => go("courses")} onEnrol={async (c) => {
+            const { data: existing } = await window.supabase.from('enrollments').select('id').eq('user_id', user.id).eq('course_id', c.id).single();
+            if (!existing) {
+              await window.supabase.from('enrollments').insert({ user_id: user.id, course_id: c.id, progress: 0 });
+              await fetchUserData(user.id);
+            }
+            go("courses");
+            showToast(`Enrolled in ${c.code}`);
+          }} />}
+          {screen === "course" && activeCourse && <window.CourseScreen course={activeCourse} onBack={() => go("courses")} />}
           {screen === "calendar" && <window.CalendarScreen />}
           {screen === "messages" && <window.MessagesScreen />}
-          {screen === "profile" && <window.ProfileScreen user={D.user} onOpenCourse={openCourse} />}
+          {screen === "profile" && <window.ProfileScreen user={mockUser} onOpenCourse={openCourse} />}
         </main>
       </div>
 
