@@ -8,7 +8,30 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/iife.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous" id="supabase-cdn"></script>
+<script>
+// Wait for Supabase library to be ready (in case async loading)
+window._initSupabase = function() {
+  window.MOODLE_DATA = { user: {}, courses: [], timeline: [], calendar: {}, messages: [] };
+  var supabaseUrl = 'https://pcztdbrylkxsvsqoxwpd.supabase.co';
+  var supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjenRkYnJ5bGt4c3ZzcW94d3BkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMTc2NzUsImV4cCI6MjA5Nzc5MzY3NX0.L1RR-5th0FTA-QEKlD_QMoGE8MWxgJIFejQo2PP3Dwg';
+  // Library is at window.supabase, create client
+  var lib = window.supabase;
+  if (lib && lib.createClient) {
+    var client = lib.createClient(supabaseUrl, supabaseKey);
+    window.supabaseClient = client;
+    // Replace window.supabase with client for easier access
+    window.supabase = client;
+    console.log('Supabase client ready');
+    return true;
+  } else {
+    console.error('Supabase CDN failed to load global, typeof supabase:', typeof window.supabase);
+    return false;
+  }
+};
+// Try to init immediately (if library already loaded)
+if (window.supabase) { window._initSupabase(); }
+</script>
 <style>
 
 /* tokens/colors.css */
@@ -240,13 +263,8 @@ html, body { margin: 0; background: var(--gray-100); }
 <div id="root"></div>
 <script>window.__WORDMARK = "data:image/svg+xml;utf8,%3Csvg%20width%3D%22118%22%20height%3D%2230%22%20viewBox%3D%220%200%20118%2030%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20role%3D%22img%22%20aria-label%3D%22moodle%22%3E%0A%20%20%0A%20%20%3Ctext%20x%3D%220%22%20y%3D%2223%22%20font-family%3D%22-apple-system%2C%20%26%2339%3BSegoe%20UI%26%2339%3B%2C%20Roboto%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20letter-spacing%3D%22-0.5%22%20fill%3D%22%23f98012%22%3Emoodle%3C%2Ftext%3E%0A%20%20%0A%20%20%3Cg%20transform%3D%22translate(20.5%2C3.2)%22%20fill%3D%22%23f98012%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%203.2%20L6%200%20L12%203.2%20L6%206.4%20Z%22%3E%3C%2Fpath%3E%0A%20%20%20%20%3Crect%20x%3D%225.4%22%20y%3D%225.2%22%20width%3D%221.2%22%20height%3D%223.4%22%20rx%3D%220.6%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Ccircle%20cx%3D%226%22%20cy%3D%229%22%20r%3D%221.1%22%3E%3C%2Fcircle%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E";</script>
 <script>
-// Placeholder for mock data (defined later)
-window.MOODLE_DATA = window.MOODLE_DATA || { user: {}, courses: [] };
-
-// Supabase client initialization
-const SUPABASE_URL = 'https://pcztdbrylkxsvsqoxwpd.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjenRkYnJ5bGt4c3ZzcW94d3BkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMTc2NzUsImV4cCI6MjA5Nzc5MzY3NX0.L1RR-5th0FTA-QEKlD_QMoGE8MWxgJIFejQo2PP3Dwg';
-window.supabase = window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Initialize Supabase client (runs after CDN loads)
+window._initSupabase && window._initSupabase();
 </script>
 <script>
 /* === Design System bundle (inlined) === */
