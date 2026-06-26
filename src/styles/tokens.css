@@ -1,0 +1,163 @@
+:root {
+  /* Brand */
+  --moodle-orange: #f98012;
+  --moodle-orange-dark: #e8710a;
+  --brand-primary: #0f6cbf;
+  --brand-primary-hover: #0c5aa0;
+  --brand-primary-active: #0a4d8a;
+  --brand-primary-soft: #e7f0f9;
+
+  /* Gray scale */
+  --white: #ffffff;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  --black: #000000;
+
+  /* Semantic status */
+  --success: #357a32;
+  --success-soft: #e8f3e8;
+  --info: #1f7e9a;
+  --info-soft: #e4f1f5;
+  --warning: #f0ad4e;
+  --warning-soft: #fcf3e6;
+  --danger: #ca3120;
+  --danger-soft: #f9e7e5;
+
+  /* Semantic aliases */
+  --text-body: var(--gray-900);
+  --text-muted: var(--gray-600);
+  --text-link: var(--brand-primary);
+  --text-on-brand: var(--white);
+  --text-heading: #1d2125;
+
+  --surface-page: var(--white);
+  --surface-card: var(--white);
+  --surface-sunken: var(--gray-100);
+  --surface-hover: var(--gray-100);
+  --surface-navbar: var(--white);
+
+  --border-color: var(--gray-300);
+  --border-color-strong: var(--gray-400);
+  --divider: var(--gray-200);
+
+  /* Course tile colors */
+  --course-blue:    #1f6fd0;
+  --course-navy:    #2a3f6b;
+  --course-cyan:    #1394d6;
+  --course-tan:     #c79a5e;
+  --course-magenta: #d6107a;
+  --course-purple:  #6b3fa0;
+  --course-teal:    #138a72;
+  --course-amber:   #d98b1e;
+
+  /* Focus ring */
+  --focus-ring: rgba(15, 108, 191, 0.35);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-size-base: 0.9375rem;
+  --line-height-base: 1.5;
+  --font-size-h1: 1.75rem;
+  --font-size-h2: 1.375rem;
+  --font-size-h3: 1.175rem;
+  --font-size-h4: 1.0625rem;
+  --font-size-h5: 0.9375rem;
+  --font-size-h6: 0.8125rem;
+  --font-size-lg: 1.0625rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-xs: 0.75rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-heading: 1.25;
+  --line-height-snug: 1.4;
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 3rem;
+  --space-1-5: 0.375rem;
+  --space-2-5: 0.75rem;
+
+  /* Border radius */
+  --radius-sm: 0.2rem;
+  --radius: 0.25rem;
+  --radius-lg: 0.3rem;
+  --radius-pill: 50rem;
+  --radius-circle: 50%;
+
+  /* Borders */
+  --border-width: 1px;
+  --border: var(--border-width) solid var(--border-color);
+
+  /* Shadows */
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  --shadow-focus: 0 0 0 0.2rem var(--focus-ring);
+
+  /* Layout */
+  --navbar-height: 60px;
+  --drawer-width: 285px;
+  --content-max-width: 830px;
+  --content-max-width-wide: 1140px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--gray-100);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-body);
+  background-color: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5rem;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--text-heading);
+}
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+h5 { font-size: var(--font-size-h5); }
+h6 { font-size: var(--font-size-h6); }
+
+p { margin: 0 0 1rem; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--brand-primary-hover);
+  text-decoration: underline;
+}
+
+small { font-size: var(--font-size-sm); }
+hr { border: 0; border-top: var(--border); margin: 1rem 0; }
+
+#root { min-height: 100vh; }

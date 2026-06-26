@@ -1,0 +1,12 @@
+.ds-course { display: flex; flex-direction: column; width: 100%; background: #fff; border: var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow .15s ease, transform .15s ease; }
+a.ds-course:hover { box-shadow: var(--shadow-sm); text-decoration: none; color: inherit; transform: translateY(-1px); }
+.ds-course__media { position: relative; height: 100px; background-size: cover; background-position: center; }
+.ds-course__pattern { position: absolute; inset: 0; opacity: .9; background-image: linear-gradient(135deg, rgba(255,255,255,.18) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.18) 50%, rgba(255,255,255,.18) 75%, transparent 75%); background-size: 22px 22px; }
+.ds-course__body { padding: .7rem .8rem .85rem; }
+.ds-course__code { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); letter-spacing: .02em; color: var(--text-muted); text-transform: uppercase; }
+.ds-course__name { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--brand-primary); margin: .2rem 0 0; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+a.ds-course:hover .ds-course__name { text-decoration: underline; }
+.ds-course__progress { margin-top: .6rem; }
+.ds-course--row { flex-direction: row; align-items: stretch; }
+.ds-course--row .ds-course__media { height: auto; width: 120px; flex: none; }
+.ds-course--row .ds-course__body { flex: 1; min-width: 0; padding: .85rem 1rem; }

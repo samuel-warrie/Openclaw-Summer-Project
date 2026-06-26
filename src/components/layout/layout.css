@@ -1,0 +1,7 @@
+.ds-card { background: var(--surface-card); border: var(--border); border-radius: var(--radius); }
+.ds-card__header { padding: 1rem 1.25rem; border-bottom: var(--border); }
+.ds-card__header--plain { border-bottom: 0; padding-bottom: 0; }
+.ds-card__title { font-size: var(--font-size-h4); font-weight: var(--font-weight-bold); color: var(--text-heading); margin: 0; }
+.ds-card__header-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.ds-card__body { padding: 1.25rem; }
+.ds-card__footer { padding: .85rem 1.25rem; border-top: var(--border); background: var(--gray-100); }
