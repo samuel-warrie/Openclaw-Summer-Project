@@ -21,7 +21,9 @@ export function Navbar({ links = [], user = { name: '' }, messageCount = 0, noti
       <a className="ds-nav__brand" href="#">{logo || <Wordmark />}</a>
       <div className="ds-nav__links">
         {links.map(l => (
-          <a key={l.label} href={l.href || '#'} className={['ds-nav__link', l.active ? 'ds-nav__link--active' : ''].filter(Boolean).join(' ')}>
+          <a key={l.label} href={l.href || '#'}
+            onClick={l.onClick ? (e) => { e.preventDefault(); l.onClick(); } : undefined}
+            className={['ds-nav__link', l.active ? 'ds-nav__link--active' : ''].filter(Boolean).join(' ')}>
             {l.label}
           </a>
         ))}

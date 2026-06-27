@@ -21,7 +21,7 @@ function AuthShell({ children }) {
   );
 }
 
-export function LoginScreen({ onLogin, onGoSignup }) {
+export function LoginScreen({ onLogin, onGoSignup, successMsg }) {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [err, setErr] = useState('');
@@ -41,7 +41,12 @@ export function LoginScreen({ onLogin, onGoSignup }) {
     <AuthShell>
       <div className="auth-body">
         <h1 style={{ fontSize: 'var(--font-size-h3)', margin: '0 0 4px' }}>Log in</h1>
-        <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '0 0 20px' }}>Use your university account to continue.</p>
+        {successMsg && (
+          <div style={{ background: 'var(--success-soft)', border: '1px solid var(--success)', borderRadius: 'var(--radius)', padding: '10px 14px', fontSize: 14, color: 'var(--success)', marginBottom: 16 }}>
+            <i className="fa-solid fa-circle-check" style={{ marginRight: 8 }} />{successMsg}
+          </div>
+        )}
+        {!successMsg && <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '0 0 20px' }}>Use your university account to continue.</p>}
         <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
             icon={<i className="fa-solid fa-envelope" />} placeholder="you@student.oulu.fi" />
@@ -80,8 +85,10 @@ export function SignupScreen({ onSignup, onGoLogin }) {
       email: f.email, password: f.pw,
       options: { data: { first_name: f.first, last_name: f.last, student_id: f.studentId } },
     });
-    if (error) { setErr(error.message); setLoading(false); }
-    else { onSignup(); }
+    if (error) { setErr(error.message); setLoading(false); return; }
+    // Sign out any auto-session Supabase creates, then send user to login.
+    await supabase.auth.signOut();
+    onSignup();
   };
 
   return (

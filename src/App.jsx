@@ -9,6 +9,18 @@ import { CalendarScreen } from './screens/CalendarScreen.jsx';
 import { MessagesScreen } from './screens/MessagesScreen.jsx';
 import { ProfileScreen } from './screens/ProfileScreen.jsx';
 
+function PlaceholderScreen({ icon, title, sub }) {
+  return (
+    <div style={{ maxWidth: 830, margin: '0 auto', padding: '60px 20px', textAlign: 'center' }}>
+      <div style={{ width: 64, height: 64, borderRadius: 'var(--radius)', background: 'var(--gray-100)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+        <i className={`fa-solid ${icon}`} style={{ fontSize: 26, color: 'var(--gray-500)' }} />
+      </div>
+      <h2 style={{ margin: '0 0 8px' }}>{title}</h2>
+      <p style={{ color: 'var(--text-muted)' }}>{sub}</p>
+    </div>
+  );
+}
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -18,6 +30,7 @@ export default function App() {
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authScreen, setAuthScreen] = useState('login');
+  const [signupSuccess, setSignupSuccess] = useState(false);
   const [screen, setScreen] = useState('dashboard');
   const [activeCourse, setActiveCourse] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(true);
@@ -100,13 +113,13 @@ export default function App() {
 
   if (!user) {
     return authScreen === 'login'
-      ? <LoginScreen onLogin={() => {}} onGoSignup={() => setAuthScreen('signup')} />
-      : <SignupScreen onSignup={() => setAuthScreen('login')} onGoLogin={() => setAuthScreen('login')} />;
+      ? <LoginScreen onLogin={() => {}} onGoSignup={() => { setAuthScreen('signup'); setSignupSuccess(false); }} successMsg={signupSuccess ? 'Account created — please log in.' : ''} />
+      : <SignupScreen onSignup={() => { setSignupSuccess(true); setAuthScreen('login'); }} onGoLogin={() => setAuthScreen('login')} />;
   }
 
   const navLinks = [
-    { label: 'Dashboard', href: '#', active: screen === 'dashboard' },
-    { label: 'My courses', href: '#', active: ['courses', 'course', 'browse'].includes(screen) },
+    { label: 'Dashboard', href: '#', active: screen === 'dashboard', onClick: () => go('dashboard') },
+    { label: 'My courses', href: '#', active: ['courses', 'course', 'browse'].includes(screen), onClick: () => go('courses') },
   ];
 
   const userName = profile ? `${profile.first_name} ${profile.last_name}` : (user.email || '');
@@ -179,6 +192,12 @@ export default function App() {
           {screen === 'messages' && <MessagesScreen />}
           {screen === 'profile' && (
             <ProfileScreen user={userObj} courses={enrolledCourses} onOpenCourse={openCourse} />
+          )}
+          {screen === 'files' && (
+            <PlaceholderScreen icon="fa-folder" title="Private files" sub="Your uploaded personal files will appear here." />
+          )}
+          {screen === 'grades' && (
+            <PlaceholderScreen icon="fa-table-list" title="Grades" sub="An overview of your grades across all enrolled courses." />
           )}
         </main>
       </div>

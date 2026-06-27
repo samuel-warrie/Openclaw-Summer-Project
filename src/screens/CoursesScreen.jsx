@@ -7,6 +7,24 @@ import { supabase } from '../lib/supabaseClient.js';
 
 export function MyCoursesScreen({ courses, onOpenCourse, onBrowse }) {
   const [view, setView] = useState('card');
+  const [filter, setFilter] = useState('All');
+  const [sort, setSort] = useState('Sort by course name');
+
+  const filtered = courses.filter(c => {
+    if (filter === 'All') return true;
+    const p = c.progress ?? 0;
+    if (filter === 'In progress') return p > 0 && p < 100;
+    if (filter === 'Future') return p === 0;
+    if (filter === 'Past') return p >= 100;
+    return true;
+  });
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sort === 'Sort by course name') return (a.name || '').localeCompare(b.name || '');
+    if (sort === 'Sort by last accessed') return (b.last_accessed || '').localeCompare(a.last_accessed || '');
+    return 0;
+  });
+
   return (
     <div style={{ maxWidth: 1140, margin: '0 auto', padding: '28px 20px 60px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
@@ -14,8 +32,8 @@ export function MyCoursesScreen({ courses, onOpenCourse, onBrowse }) {
         <Button variant="primary" onClick={onBrowse}><i className="fa-solid fa-plus" /> Enrol in a course</Button>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 18 }}>
-        <Select variant="filter" options={['All', 'In progress', 'Future', 'Past']} defaultValue="In progress" />
-        <Select variant="filter" options={['Sort by course name', 'Sort by last accessed']} />
+        <Select variant="filter" options={['All', 'In progress', 'Future', 'Past']} value={filter} onChange={(e) => setFilter(e.target.value)} />
+        <Select variant="filter" options={['Sort by course name', 'Sort by last accessed']} value={sort} onChange={(e) => setSort(e.target.value)} />
         <div style={{ flex: 1 }} />
         <div style={{ display: 'flex', border: '1px solid var(--border-color-strong)', borderRadius: 'var(--radius)', overflow: 'hidden' }}>
           <button className="ds-btn ds-btn--sm" onClick={() => setView('card')} style={{ borderRadius: 0, background: view === 'card' ? 'var(--brand-primary)' : '#fff', color: view === 'card' ? '#fff' : 'var(--gray-700)' }}><i className="fa-solid fa-table-cells-large" /></button>
@@ -24,14 +42,18 @@ export function MyCoursesScreen({ courses, onOpenCourse, onBrowse }) {
       </div>
       {view === 'card' ? (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 18 }}>
-          {courses.map((c) => (
+          {sorted.length === 0 ? (
+            <p style={{ color: 'var(--text-muted)', gridColumn: '1/-1' }}>No courses match the selected filter.</p>
+          ) : sorted.map((c) => (
             <CourseCard key={c.id} code={c.code} name={c.short_name} color={c.color} progress={c.progress} href="#"
               onClick={(e) => { e.preventDefault(); onOpenCourse(c); }} />
           ))}
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {courses.map((c) => (
+          {sorted.length === 0 ? (
+            <p style={{ color: 'var(--text-muted)' }}>No courses match the selected filter.</p>
+          ) : sorted.map((c) => (
             <CourseCard key={c.id} layout="row" code={c.code} name={c.name} color={c.color} progress={c.progress} href="#"
               onClick={(e) => { e.preventDefault(); onOpenCourse(c); }} />
           ))}

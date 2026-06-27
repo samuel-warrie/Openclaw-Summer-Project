@@ -10,6 +10,13 @@ const NAV_ITEMS = [
 
 export function Drawer({ open, screen, go, onLogout }) {
   const isCoursesActive = (key) => key === 'courses' && ['courses', 'course', 'browse'].includes(screen);
+
+  const secondaryLinks = [
+    { label: 'Site home',     icon: 'fa-house',      key: 'dashboard' },
+    { label: 'Private files', icon: 'fa-folder',     key: 'files' },
+    { label: 'Grades',        icon: 'fa-table-list', key: 'grades' },
+  ];
+
   return (
     <aside className={`drawer ${open ? 'drawer--open' : ''}`}>
       <nav className="drawer__nav">
@@ -25,11 +32,11 @@ export function Drawer({ open, screen, go, onLogout }) {
 
         <div className="drawer__divider" />
 
-        {['Site home', 'Private files', 'Grades'].map((t, i) => (
-          <a key={i} href="#" className="drawer__link">
-            <i className={`fa-solid ${['fa-house', 'fa-folder', 'fa-table-list'][i]}`} style={{ width: 18, textAlign: 'center', color: 'var(--gray-500)' }} />
-            {t}
-          </a>
+        {secondaryLinks.map((l) => (
+          <button key={l.key} onClick={() => go(l.key)} className={`drawer__item ${screen === l.key ? 'drawer__item--active' : ''}`}>
+            <i className={`fa-solid ${l.icon}`} style={{ width: 18, textAlign: 'center', color: screen === l.key ? undefined : 'var(--gray-500)' }} />
+            {l.label}
+          </button>
         ))}
 
         <div className="drawer__divider" />
