@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './forms.css';
 
 export function Checkbox({ label, type = 'checkbox', checked, defaultChecked, onChange, disabled = false, name, value, className = '', ...rest }) {
@@ -18,14 +19,23 @@ export function Checkbox({ label, type = 'checkbox', checked, defaultChecked, on
   );
 }
 
-export function Input({ label, icon, help, error = false, rounded = false, id, className = '', ...rest }) {
+export function Input({ label, icon, help, error = false, rounded = false, id, className = '', type, ...rest }) {
   const fid = id;
+  const [showPassword, setShowPassword] = useState(false);
+  const isPassword = type === 'password';
+  const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
+
   return (
     <div className={['ds-field', error ? 'ds-field--error' : '', className].filter(Boolean).join(' ')}>
       {label && <label className="ds-field__label" htmlFor={fid}>{label}</label>}
       <div className="ds-input-wrap">
         {icon && <span className="ds-input-wrap__icon">{icon}</span>}
-        <input id={fid} className={['ds-input', icon ? 'ds-input--has-icon' : '', rounded ? 'ds-input--rounded' : ''].filter(Boolean).join(' ')} {...rest} />
+        <input id={fid} type={inputType} className={['ds-input', icon ? 'ds-input--has-icon' : '', rounded ? 'ds-input--rounded' : '', isPassword ? 'ds-input--password' : ''].filter(Boolean).join(' ')} {...rest} />
+        {isPassword && (
+          <button type="button" className="ds-password-toggle" onClick={() => setShowPassword(s => !s)} tabIndex={-1} aria-label={showPassword ? 'Hide password' : 'Show password'}>
+            <i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} />
+          </button>
+        )}
       </div>
       {help && <div className="ds-field__help">{help}</div>}
     </div>

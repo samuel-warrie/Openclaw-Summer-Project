@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from './lib/supabaseClient.js';
 import { Navbar } from './components/navigation/Navbar.jsx';
 import { Drawer } from './components/layout/Drawer.jsx';
-import { LoginScreen, SignupScreen } from './screens/AuthScreen.jsx';
+import { LoginScreen, SignupScreen, ForgotPasswordScreen } from './screens/AuthScreen.jsx';
 import { DashboardScreen } from './screens/DashboardScreen.jsx';
 import { MyCoursesScreen, BrowseScreen, CourseScreen } from './screens/CoursesScreen.jsx';
 import { CalendarScreen } from './screens/CalendarScreen.jsx';
@@ -31,6 +31,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [authScreen, setAuthScreen] = useState('login');
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState('');
   const [screen, setScreen] = useState('dashboard');
   const [activeCourse, setActiveCourse] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(true);
@@ -112,9 +113,28 @@ export default function App() {
   }
 
   if (!user) {
-    return authScreen === 'login'
-      ? <LoginScreen onLogin={() => {}} onGoSignup={() => { setAuthScreen('signup'); setSignupSuccess(false); }} successMsg={signupSuccess ? 'Account created — please log in.' : ''} />
-      : <SignupScreen onSignup={() => { setSignupSuccess(true); setAuthScreen('login'); }} onGoLogin={() => setAuthScreen('login')} />;
+    if (authScreen === 'login') {
+      return (
+        <LoginScreen
+          onLogin={() => {}}
+          onGoSignup={() => { setAuthScreen('signup'); setSignupSuccess(false); }}
+          onGoForgot={() => { setAuthScreen('forgot'); setSignupSuccess(false); }}
+          successMsg={signupSuccess ? 'Account created — please log in.' : ''}
+          registeredEmail={registeredEmail}
+        />
+      );
+    }
+    if (authScreen === 'signup') {
+      return (
+        <SignupScreen
+          onSignup={(email) => { setRegisteredEmail(email); setSignupSuccess(true); setAuthScreen('login'); }}
+          onGoLogin={() => setAuthScreen('login')}
+        />
+      );
+    }
+    if (authScreen === 'forgot') {
+      return <ForgotPasswordScreen onGoLogin={() => setAuthScreen('login')} />;
+    }
   }
 
   const navLinks = [

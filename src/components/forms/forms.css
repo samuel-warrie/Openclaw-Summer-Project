@@ -33,6 +33,15 @@
 .ds-input:disabled { background: var(--gray-100); opacity: .8; }
 .ds-input--has-icon { padding-left: 2.1rem; }
 .ds-input--rounded { border-radius: var(--radius-pill); }
+.ds-input--password { padding-right: 2.4rem; }
+.ds-password-toggle {
+  position: absolute; right: .7rem;
+  background: none; border: none; padding: 4px;
+  color: var(--text-muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .15s ease;
+}
+.ds-password-toggle:hover { color: var(--text-body); }
 .ds-field__help { font-size: var(--font-size-sm); color: var(--text-muted); margin-top: .3rem; }
 .ds-field--error .ds-input { border-color: var(--danger); }
 .ds-field--error .ds-field__help { color: var(--danger); }
